@@ -1,29 +1,20 @@
-let hand = 0
 input.onButtonPressed(Button.A, function () {
-    hand = randint(1, 3)
-    if (hand == 1) {
-        basic.showLeds(`
-            . # # # .
-            # # # # #
-            # # # # #
-            # # # # #
-            . # # # .
-            `)
-    } else if (hand == 2) {
-        basic.showLeds(`
-            . # # # .
-            . # # # .
-            . # # # .
-            . # # # .
-            . # # # .
-            `)
+    if (dot.get(LedSpriteProperty.X) == 2) {
+        game.addScore(1)
+        difficulty += -20
+        basic.pause(difficulty)
     } else {
-        basic.showLeds(`
-            # # . . #
-            # # . # .
-            . . # . .
-            # # . # .
-            # # . . #
-            `)
+        basic.showString("" + (game.score()))
+        game.gameOver()
     }
+})
+let difficulty = 0
+let dot: game.LedSprite = null
+game.setScore(0)
+dot = game.createSprite(2, 2)
+difficulty = 200
+basic.forever(function () {
+    dot.move(1)
+    dot.ifOnEdgeBounce()
+    basic.pause(difficulty)
 })
