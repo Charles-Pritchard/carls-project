@@ -4,13 +4,13 @@ input.onButtonPressed(Button.A, function () {
         difficulty += -20
         basic.pause(difficulty)
     } else {
-        basic.showString("" + (game.score()))
-        game.gameOver()
+        game.removeLife(1)
     }
 })
 let difficulty = 0
 let dot: game.LedSprite = null
 game.setScore(0)
+game.setLife(3)
 dot = game.createSprite(2, 2)
 difficulty = 200
 basic.forever(function () {
